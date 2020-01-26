@@ -11,9 +11,14 @@ import matplotlib.cm as cm
 def load_images(path):
     images = []
     for im_path in glob.glob(path+"*"):
-        images.append(imageio.imread(im_path))
+        im = imageio.imread(im_path)
+        im = to_greyscale(im)
+        images.append(im.flatten())
+    return np.array(images).astype(int)
 
-    return np.array(images)
+def to_greyscale(im):
+    """https://stackoverflow.com/questions/41971663/use-numpy-to-convert-rgb-pixel-array-into-grayscale"""
+    return np.dot(im[...,:3], [.3, .6, .1])
 
 def display_samples(data, start, shape=(243, 320)):
     """Displays 16 samples from start in a subplot."""
@@ -24,5 +29,5 @@ def display_samples(data, start, shape=(243, 320)):
 
 def display_sample(data, n, shape=(243, 320)):
     """Displays sample n"""
-    letter_image = np.reshape(data[n, :], shape, order='F').transpose()
-    plt.imshow(letter_image, cmap=cm.Greys_r)
+    image = np.reshape(data[n, :], shape, order='F').transpose()
+    plt.imshow(image, cmap=cm.Greys_r)
