@@ -10,7 +10,8 @@ TODO:
 """
 
 import numpy as np
-from util import load_images
+import util
 
 if __name__ == "__main__":
-    images = load_images("../data/yalefaces/")
+    images = util.load_images("../data/yalefaces/")
+    util.display_samples(images, 1, images.shape[1:])
