@@ -1,6 +1,25 @@
 import numpy as np
+import scipy
+from math import sqrt
 
-def train(data, n):
+def train_random_projection(data, k):
+    """Performs a random projection of the data into k dimensions.
+    Let n be the number of samples
+        d be the original number of dimensions
+        k be the new number of dimensions
+        R be a random matrix
+    """
+    n, d = data.shape
+    print(data.shape)
+      
+    R = (np.random.choice(3, d*k, p=[1/6, 2/3, 1/6])) - 1
+    R = R * sqrt(3)
+    R = R.reshape((d, k))
+
+    projected = np.dot((data - np.mean(data)), R)
+    return projected
+
+def train_pca(data, n):
     """Calculates the n best PC axes then projects the training data onto them."""
     print("\tCalculating Covariance")
     cov = np.cov(data, rowvar=0)
