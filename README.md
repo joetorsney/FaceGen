@@ -1,3 +1,6 @@
+## Archived
+It's a cool idea, I just don't have time right now!
+
 # This Person *Definitely* Does Not Exist: Creating New Faces From Approximations
 
 ## Original Idea
